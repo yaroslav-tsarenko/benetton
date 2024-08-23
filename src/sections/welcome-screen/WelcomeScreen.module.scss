@@ -1,0 +1,60 @@
+.welcomeScreen {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary-color);
+  height: 100dvh;
+  justify-content: space-between;
+  width: 100%;
+  padding: 30px 0 120px 0;
+}
+
+.glowEffect {
+  display: flex;
+  width: 100%;
+  height: 2vw;
+  border-radius: 150%;
+  justify-content: center;
+  align-items: center;
+  background: var(--green-dark);
+  box-shadow: 0 0 50px 30px var(--green-dark), /* inner white */
+  0 0 30px 60px var(--green-dark), /* middle magenta */
+  0 0 170px 90px var(--green-dark); /* outer cyan */
+}
+
+.welcomeScreenLogo {
+  display: flex;
+  background: url("../../assets/icons/benetton-logo.svg") no-repeat center;
+  width: 600px;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-end; /* Align items to the bottom */
+  justify-items: center;
+  height: 600px;
+  margin: 200px auto 0 auto;
+  position: relative; /* Ensure the button can be positioned absolutely */
+
+  button {
+    display: flex;
+    border-radius: 150px;
+    width: 140px;
+    height: 140px;
+    color: var(--white);
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-size: var(--font-24px);
+    font-weight: bold;
+    background: var(--secondary-color-transparent);
+    position: absolute; /* Position the button absolutely */
+    bottom: 130px; /* Align the button to the bottom */
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      backdrop-filter: blur(15px);
+    }
+
+  }
+}
