@@ -1,0 +1,23 @@
+.ruleAlert {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  align-content: start;
+  justify-items: start;
+  gap: 10px;
+  width: 100%;
+
+  p{
+    color: var(--text-color-white);
+    font-size: var(--font-14px);
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}

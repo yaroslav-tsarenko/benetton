@@ -1,10 +1,10 @@
 .welcomeScreen {
   display: flex;
   flex-direction: column;
-  background: var(--primary-color);
   height: 100dvh;
   justify-content: space-between;
   width: 100%;
+  overflow: hidden;
   padding: 30px 0 120px 0;
 }
 
@@ -15,10 +15,10 @@
   border-radius: 150%;
   justify-content: center;
   align-items: center;
-  background: var(--green-dark);
-  box-shadow: 0 0 50px 30px var(--green-dark), /* inner white */
-  0 0 30px 60px var(--green-dark), /* middle magenta */
-  0 0 170px 90px var(--green-dark); /* outer cyan */
+ /* background: var(--green-dark);
+  box-shadow: 0 0 50px 30px var(--green-dark), !* inner white *!
+  0 0 30px 60px var(--green-dark), !* middle magenta *!
+  0 0 170px 90px var(--green-dark); !* outer cyan *!*/
 }
 
 .welcomeScreenLogo {
@@ -47,9 +47,10 @@
     backdrop-filter: blur(10px);
     font-size: var(--font-24px);
     font-weight: bold;
-    background: var(--secondary-color-transparent);
+    background: rgba(16, 142, 9, 0.42);
     position: absolute; /* Position the button absolutely */
     bottom: 130px; /* Align the button to the bottom */
+    z-index: 1000;
     transition: 0.2s ease-in-out;
 
     &:hover {

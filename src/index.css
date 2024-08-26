@@ -7,18 +7,28 @@
     font-family: "Roboto" , sans-serif;
 }
 
-body{
+body {
     background-color: var(--primary-color);
     color: var(--white);
+    background-image: url(./assets/images/glow-vector.svg);
+    background-position: top;
+    background-repeat: no-repeat;
 }
 
 :root {
     --primary-color: #161616;
     --secondary-color: #108e09;
-    --secondary-color-transparent: rgba(16, 142, 9, 0.22);
+    --secondary-color-hovered: #13a30b;
+    --secondary-color-transparent: rgba(21, 30, 21, 0.54);
     --secondary-color-dark: #13550e;
-    --green-dark: #0f430a;
+    --green: #163515;
+    --green-dark: #144313;
     --tertiary-color: #151b14;
+    --search-bar-color: #011c01;
     --white: #fff;
+    --text-color-white: #DFDFDF;
     --font-24px: 1.5rem;
+    --font-20px: 1.25rem;
+    --font-12px: 0.75rem;
+    --font-14px: 0.875rem;
 }

@@ -1,0 +1,65 @@
+.buttonFrame {
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-content: center;
+  align-items: center;
+
+  span {
+    font-size: 16px;
+    color: var(--white);
+    font-weight: lighter;
+    margin: 0 0 0 15px;
+    transition: 0.3s ease-in-out;
+  }
+
+  h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    transition: 0.3s ease-in-out;
+    margin: 0 0 0 44px;
+  }
+
+  &.big {
+    background-image: url('../../assets/images/button-frame-big.svg');
+    width: 367px; // Update to match the SVG dimensions
+    height: 64px;
+  }
+
+  &.big:hover {
+    background-image: url('../../assets/images/button-frame-big-hovered.svg');
+    width: 367px; // Ensure the hover state has the same dimensions
+    height: 64px;
+
+    h2 {
+      color: var(--white);
+    }
+
+    span{
+      font-weight: bold;
+    }
+  }
+
+  &.small {
+    background-image: url('../../assets/images/button-frame-small.svg');
+    width: 259px;
+    height: 64px;
+  }
+
+  &.small:hover {
+    background-image: url('../../assets/images/button-frame-small-hovered.svg');
+    width: 259px;
+    height: 64px;
+
+    h2 {
+      color: var(--white);
+    }
+
+    span{
+      font-weight: bold;
+    }
+  }
+}
