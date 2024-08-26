@@ -1,17 +1,17 @@
-import React, {FC} from 'react';
-import './LinkButton.scss';
+import React, { FC } from 'react';
+import styles from './LinkButton.module.scss';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
-    text: string;
-    onClick: () => void;
+    children?: React.ReactNode;
+    link: string;
 }
 
-const LinkButton: FC<ButtonProps> = ({ text }) => {
+const LinkButton: FC<ButtonProps> = ({ children, link }) => {
     return (
-        <button className="custom-button">
-            <span className="button-text">{text}</span>
-            <span className="arrow">→</span>
-        </button>
+        <Link className={styles.linkButton} to={link}>
+            {children}
+        </Link>
     );
 }
 

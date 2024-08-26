@@ -1,0 +1,74 @@
+.benettonOnForumWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 150px 0 90px 0;
+
+  h1 {
+    color: rgba(16, 142, 9, 0.5);
+    font-size: 100px;
+    margin: 0 auto;
+    padding: 0;
+
+  }
+}
+
+.benettonOnForumContent {
+  width: 100%;
+  background: rgba(22, 28, 21, 0.44);
+  backdrop-filter: blur(8px);
+  margin-top: -30px;
+  height: 190px;
+  border-radius: 8px;
+  flex-direction: column;
+  position: relative;
+  padding: 24px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: 100%;
+    background: url("../../assets/images/half-logo.svg") no-repeat center center;
+    background-size: contain;
+  }
+
+  section {
+    display: flex;
+    height: fit-content;
+    gap: 15px;
+
+    &:first-child {
+      display: flex;
+      width: 100%;
+      align-content: start;
+      margin: 0 0 15px 0;
+      justify-content: start;
+    }
+
+    &:last-child {
+      align-content: end;
+      justify-content: end;
+      margin: 0 165px 0 0;
+    }
+  }
+}
+
+.tip {
+  width: 240px;
+  height: 65px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #161c15;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-color);
+
+  p{
+    font-size: var(--font-14px);
+    color: var(--white);
+  }
+}

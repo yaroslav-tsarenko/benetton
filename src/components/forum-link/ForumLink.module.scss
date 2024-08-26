@@ -1,0 +1,21 @@
+.forumLink {
+  width: 240px;
+  height: 65px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--green);
+  text-decoration: none;
+  color: var(--white);
+  transition: 0.2s ease-in-out;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:hover {
+    background: var(--secondary-color);
+    color: var(--white);
+  }
+}

@@ -1,0 +1,17 @@
+.linkButton{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  padding: 11px 32px 11px 32px;
+  background: var(--green-dark);
+  color: var(--white);
+  transition: 0.2s ease-in-out;
+  text-decoration: none;
+  border-radius: 5px;
+
+  &:hover {
+    background: var(--secondary-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}

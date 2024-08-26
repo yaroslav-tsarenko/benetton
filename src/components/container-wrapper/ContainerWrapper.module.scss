@@ -1,0 +1,12 @@
+.containerWrapper {
+  display: flex;
+  padding: 24px;
+  border-radius: 12px;
+  width: fit-content;
+  height: fit-content;
+  background: var(--secondary-color-transparent);
+  text-align: center;
+  flex-direction: column;
+  gap: 24px;
+  backdrop-filter: blur(10px);
+}

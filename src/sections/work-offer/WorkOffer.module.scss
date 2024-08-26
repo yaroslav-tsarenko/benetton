@@ -1,0 +1,74 @@
+.workOfferWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 120px 0 120px 0;
+
+  h3 {
+    font-size: 40px;
+    margin: 0 auto 30px auto;
+    padding: 0;
+    color: rgba(16, 142, 9, 0.5);
+  }
+}
+
+.workOfferContent {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.partnerShip {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+
+  p {
+    padding: 10px;
+    border-radius: 8px;
+    background: #151b14;
+  }
+
+  .partnerLink {
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background: var(--secondary-color-hovered);
+    }
+  }
+}
+
+.staff{
+  display: flex;
+  width: 50%;
+  gap: 10px;
+  background: #151b14;
+  border-radius: 8px;
+  justify-content: space-between;
+  padding: 10px;
+
+  section{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 45%;
+
+    p{
+        color: var(--white);
+        font-size: var(--font-14px);
+      font-weight: 300;
+    }
+  }
+}
