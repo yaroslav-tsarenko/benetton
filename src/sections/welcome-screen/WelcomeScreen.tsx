@@ -9,7 +9,6 @@ interface WelcomeScreenProps {
 
 const WelcomeScreen: FC<WelcomeScreenProps> = ({onClick}) => {
     return (
-        <Fade>
             <div className={styles.welcomeScreen}>
                 <div className={styles.glowEffect}>
                     <PrimaryLogo/>
@@ -18,7 +17,6 @@ const WelcomeScreen: FC<WelcomeScreenProps> = ({onClick}) => {
                     <button onClick={onClick}>CLICK ME</button>
                 </div>
             </div>
-        </Fade>
 
     );
 };
