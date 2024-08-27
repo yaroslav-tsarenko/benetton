@@ -28,7 +28,7 @@ const Home = () => {
     }, [showHomePage]);
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${!hideWelcomeScreen ? styles.fullHeight : styles.fitContent}`}>
             <div className={`${styles.content} ${!showHomePage ? styles.show : styles.hide} ${hideWelcomeScreen ? styles.hidden : ''}`}>
                 <WelcomeScreen onClick={handleClick}/>
             </div>
