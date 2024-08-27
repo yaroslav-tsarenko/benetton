@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin: 120px 0 120px 0;
+  padding: 30px;
 
   h1 {
     font-size: 110px;
@@ -46,4 +47,60 @@
   h2 {
     text-transform: uppercase;
   }
+}
+
+@media screen and (max-width: 1200px) {
+  .importantRulesWrapper {
+
+
+    h1 {
+      text-align: center;
+      font-size: 70px;
+      line-height: 0.8;
+
+    }
+  }
+
+  .importantRulesContent {
+    margin: -7px 0 0 0;
+    background: url("../../assets/images/half-logo-upper.svg") top no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    padding: 120px 10px 10px 10px;
+    height: fit-content;
+    gap: 15px;
+    flex-direction: column;
+    backdrop-filter: blur(10px);
+    border-radius: 13px;
+  }
+
+  .importantRulesText{
+    width: 100%;
+    padding: 0;
+
+    h2{
+      text-align: center;
+    }
+  }
+
+
+
+}
+
+@media screen and (max-width: 476px) {
+  .importantRulesWrapper {
+
+
+    h1 {
+      font-size: 50px;
+    }
+  }
+
+  .importantRulesContent {
+    margin: -7px 0 0 0;
+  }
+
 }

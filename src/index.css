@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto" , sans-serif;
+    transition: 0.2s ease-in-out;
 }
 
 body {
@@ -19,7 +20,7 @@ body {
     --primary-color: #161616;
     --secondary-color: #108e09;
     --secondary-color-hovered: #13a30b;
-    --secondary-color-transparent: rgba(21, 30, 21, 0.54);
+    --secondary-color-transparent: rgba(21, 30, 21, 0.48);
     --secondary-color-dark: #13550e;
     --green: #163515;
     --green-dark: #144313;

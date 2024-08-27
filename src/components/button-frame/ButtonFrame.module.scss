@@ -63,3 +63,39 @@
     }
   }
 }
+
+@media screen and (max-width: 425px) {
+
+  .buttonFrame{
+
+    h2{
+      display: none;
+      color: white;
+    }
+
+    span{
+      margin: 0 0 0 35px;
+      font-size: 12px;
+      color: white;
+    }
+
+    &.big {
+      background-image: url('../../assets/images/button-frame-small-hovered.svg');
+      width: 259px;
+      height: 64px;
+    }
+
+    &.big:hover {
+      background-image: url('../../assets/images/button-frame-small-hovered.svg');
+      width: 259px;
+      height: 64px;
+
+
+
+      span{
+        font-weight: bold;
+      }
+    }
+  }
+
+}

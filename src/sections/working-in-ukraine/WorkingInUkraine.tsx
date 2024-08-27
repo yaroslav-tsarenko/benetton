@@ -6,6 +6,7 @@ import {ReactComponent as UkraineMap} from "../../assets/images/ukraine-map.svg"
 import {regions} from "../../data/regions/regions";
 import {settlements} from "../../data/settlements/settlements"; // Імпорт даних про населені пункти
 import {Fade} from "react-awesome-reveal";
+import {Link} from "react-router-dom";
 
 const WorkingInUkraine = () => {
     const [searchTerm, setSearchTerm] = useState("");
@@ -37,7 +38,7 @@ const WorkingInUkraine = () => {
                 <div className={styles.sidebar}>
                     <div className={styles.regionSearchWrapper}>
                         <div className={styles.regionSearchBar}>
-                            <section>
+                            <div className={styles.searchbar}>
                                 <input
                                     type="text"
                                     placeholder="Пошук міста"
@@ -47,7 +48,7 @@ const WorkingInUkraine = () => {
                                 <button>
                                     <SearchIcon/>
                                 </button>
-                            </section>
+                            </div>
                             {searchTerm && (
                                 <Fade>
                                     <div className={styles.regionsAutoComplete}>
@@ -91,6 +92,63 @@ const WorkingInUkraine = () => {
                         </LinkButton>
                         <p>Контакт, якщо цікавить пересилка або ОПТ</p>
                     </section>
+                </div>
+            </div>
+            <div className={styles.regionContentContainerMobile}>
+                <div className={styles.regionSearchWrapper}>
+                    <div className={styles.regionSearchBar}>
+                        <div className={styles.searchbar}>
+                            <input
+                                type="text"
+                                placeholder="Пошук міста"
+                                value={searchTerm}
+                                onChange={handleInputChange}
+                            />
+                            <button>
+                                <SearchIcon/>
+                            </button>
+                        </div>
+                        {searchTerm && (
+                            <Fade>
+                                <div className={styles.regionsAutoComplete}>
+                                    {filteredRegions.map((region, index) => (
+                                        <p key={index} onClick={() => handleRegionSelect(region)}>
+                                            {region}
+                                        </p>
+                                    ))}
+                                </div>
+                            </Fade>
+                        )}
+                    </div>
+                    <section className={styles.listOfRegions}>
+                        <div className={styles.listOfRegionsHeader}>
+                            <h4>Список населених пунктів</h4>
+                        </div>
+                        <div className={styles.listOfRegionsContent}>
+                            {selectedRegion ? (
+                                filteredSettlements.map((settlement, index) => (
+                                    <p key={index}>{settlement}</p>
+                                ))
+                            ) : (
+                                <p>Виберіть регіон</p>
+                            )}
+                        </div>
+                    </section>
+                </div>
+                <div className={styles.chooseOptionsContent}>
+                    <section>
+                        <Link className={styles.link} to={"/"}>
+                            Хочу працювати
+                        </Link>
+                        <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
+                    </section>
+                    <section>
+                        <Link className={styles.link} to="/">
+                            Відправки / ОПТ
+                        </Link>
+                        <p>Контакт, якщо цікавить пересилка або ОПТ</p>
+                    </section>
+
                 </div>
             </div>
         </div>
