@@ -13,10 +13,13 @@ const FastOrder = () => {
                     <ButtonFrame type="big" link="/" title="BNT24.CC" number="02"/>
                     <ButtonFrame type="big" link="/" title="GREEN-MARKET.OR" number="03"/>
                 </ContainerWrapper>
-                <ContainerWrapper title="ТЕЛЕГРАМ ЧАТ">
-                    <ButtonFrame type="small" link="/" title="GREEN CHAT" />
+                <ContainerWrapper
+                    title="ТЕЛЕГРАМ ЧАТ"
+                    subTitle="Дотримуйтесь правил поводження у чаті Приємного спілкування!">
+                    <ButtonFrame type="small" link="/" title="GREEN CHAT"/>
                 </ContainerWrapper>
-                <ContainerWrapper title="ТЕЛЕГРАМ БОТИ">
+                <ContainerWrapper title="ТЕЛЕГРАМ БОТИ" subTitle=" Намагаємося бути краще і постійно слідкуємо
+                за якістю сервісу, завжди готові вирішити вашу проблему">
                     <ButtonFrame type="big" link="/" title="BEN_MAGAZIN_BOT" number="01"/>
                     <ButtonFrame type="big" link="/" title="B2_MARKET_BOT" number="02"/>
                 </ContainerWrapper>

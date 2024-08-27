@@ -1,3 +1,9 @@
+.containerWrapperOuter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .containerWrapper {
   display: flex;
   padding: 24px;
@@ -10,3 +16,32 @@
   gap: 24px;
   backdrop-filter: blur(10px);
 }
+
+.bottomSubTitle {
+  font-size: var(--font-14px);
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  max-width: 285px;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--secondary-color);
+}
+
+
+@media screen and (max-width: 1260px) {
+  .containerWrapper {
+    width: 100%;
+    align-content: center;
+    align-items: center;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .containerWrapper {
+    padding: 24px 5px 24px 5px;
+  }
+
+}
+

@@ -12,6 +12,9 @@ const BenettonOnForum = () => {
                     <ForumLink link="/" title="Psylab"/>
                     <ForumLink link="/" title="RcClub"/>
                     <ForumLink link="/" title="Legalizer"/>
+                    <p className={styles.tipMobile}>
+                        Залишайте відгуки про послуги, будемо дуже вдячні :)
+                    </p>
                 </section>
                 <section>
                     <ForumLink link="/" title="Bigbro"/>

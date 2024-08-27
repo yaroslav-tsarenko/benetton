@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 150px 0 90px 0;
+  padding: 0 15px 0 15px;
 
   h1 {
     color: rgba(16, 142, 9, 0.5);
@@ -12,6 +13,10 @@
   }
 }
 
+.tipMobile{
+  display: none;
+}
+
 .benettonOnForumContent {
   width: 100%;
   background: rgba(22, 28, 21, 0.44);
@@ -19,6 +24,7 @@
   margin-top: -30px;
   height: 190px;
   border-radius: 8px;
+  display: flex;
   flex-direction: column;
   position: relative;
   padding: 24px;
@@ -38,6 +44,7 @@
     display: flex;
     height: fit-content;
     gap: 15px;
+
 
     &:first-child {
       display: flex;
@@ -67,8 +74,108 @@
   border-radius: 10px;
   border: 2px solid var(--secondary-color);
 
-  p{
+  p {
     font-size: var(--font-14px);
     color: var(--white);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .benettonOnForumWrapper {
+
+
+    h1 {
+      color: rgba(16, 142, 9, 0.5);
+      font-size: 80px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0;
+
+    }
+  }
+  .benettonOnForumContent {
+    margin-top: -25px;
+  }
+}
+
+
+@media screen and (max-width: 1275px) {
+
+  .tip {
+    display: none;
+  }
+
+  .tipMobile{
+    display: flex;
+  }
+
+  .benettonOnForumContent {
+    height: fit-content;
+    display: flex;
+    flex-direction: unset;
+    gap: 10px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/images/half-logo.svg") no-repeat right center;
+      background-size: contain;
+    }
+
+    section {
+      flex-direction: column;
+      gap: 10px;
+
+      &:first-child {
+        margin: 0;
+        width: 50%;
+        gap: 10px;
+      }
+
+      &:last-child {
+        margin: 0;
+        width: 50%;
+        gap: 10px;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1068px) {
+  .benettonOnForumWrapper {
+
+
+    h1 {
+      color: rgba(16, 142, 9, 0.5);
+      font-size: 50px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0;
+      line-height: 0.8;
+
+    }
+  }
+  .benettonOnForumContent {
+    margin-top: -5px;
+  }
+
+}
+
+@media screen and (max-width: 425px){
+  .benettonOnForumWrapper {
+
+
+    h1 {
+      color: rgba(16, 142, 9, 0.5);
+      font-size: 35px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0;
+      line-height: 0.8;
+
+    }
   }
 }
