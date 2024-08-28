@@ -1,0 +1,17 @@
+.rotatingLinesLoader{
+  display: flex;
+  gap: 5px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  justify-items: center;
+  transition: 0.2s ease-in-out;
+
+  p{
+    color: #fff;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
+  }
+}

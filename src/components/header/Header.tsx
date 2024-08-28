@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import { ReactComponent as PrimaryLogo } from "../../assets/images/primary-logo.svg";
-import { ReactComponent as SmallLogo } from "../../assets/images/small-logo-benetton.svg";
-import { ReactComponent as TimesIcon } from "../../assets/icons/timesIcon.svg";
+import React, {useState} from 'react';
+import {Link} from "react-router-dom";
+import {ReactComponent as PrimaryLogo} from "../../assets/images/primary-logo.svg";
+import {ReactComponent as SmallLogo} from "../../assets/images/small-logo-benetton.svg";
+import {ReactComponent as TimesIcon} from "../../assets/icons/timesIcon.svg";
 import LinkButton from "../link-button/LinkButton";
 import styles from './Header.module.scss';
-import { RxHamburgerMenu } from "react-icons/rx";
+import {RxHamburgerMenu} from "react-icons/rx";
+import {useLinkStore} from "../../store/linkStore";
 
 const Header = () => {
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    const getLink = useLinkStore((state) => state.getLink);
+    const writeUsLink = getLink("writeUs") || '/';
+    const workWithUsLink = getLink("writeUs") || '/';
+    const whereToBuyLink = getLink("whereToBuy") || '/';
+    const whereWorkLink = getLink("whereWork") || '/';
+    const reviewsLink = getLink("reviews") || '/';
+    const rulesLink = getLink("rules") || '/';
 
     const toggleBurgerMenu = () => {
         setIsBurgerOpen(!isBurgerOpen);
@@ -18,31 +26,31 @@ const Header = () => {
         <>
             <div className={`${styles.burgerMenuOverlay} ${isBurgerOpen ? styles.show : styles.hide}`}>
                 <div className={`${styles.burgerMenu}`}>
-                    <TimesIcon onClick={toggleBurgerMenu} className={styles.timesButton} />
-                    <PrimaryLogo />
+                    <TimesIcon onClick={toggleBurgerMenu} className={styles.timesButton}/>
+                    <PrimaryLogo/>
                     <nav>
-                        <Link className={styles.linkButtonNav} to="/">
+                        <Link className={styles.linkButtonNav} to={writeUsLink}>
                             Написати нам
                         </Link>
-                        <Link className={styles.linkButtonNav} to="/">
+                        <Link className={styles.linkButtonNav} to={writeUsLink}>
                             Працювати у нас
                         </Link>
                     </nav>
-                    <hr />
+                    <hr/>
                     <nav>
-                        <Link className={styles.linkButtonNav} to="/">
-                            Написати нам
+                        <Link className={styles.linkButtonNav} to={whereWorkLink}>
+                            Де працюємо
                         </Link>
-                        <Link className={styles.linkButtonNav} to="/">
-                            Працювати у нас
+                        <Link className={styles.linkButtonNav} to={whereToBuyLink}>
+                            Де купити
                         </Link>
                     </nav>
                     <nav>
-                        <Link className={styles.linkButtonNav} to="/">
-                            Написати нам
+                        <Link className={styles.linkButtonNav} to={reviewsLink}>
+                            Відгуки
                         </Link>
-                        <Link className={styles.linkButtonNav} to="/">
-                            Працювати у нас
+                        <Link className={styles.linkButtonNav} to={rulesLink}>
+                            Правила
                         </Link>
                     </nav>
                 </div>
@@ -51,35 +59,35 @@ const Header = () => {
                 <div className={styles.headerContent}>
                     <nav>
                         <Link to="/" className={styles.logo}>
-                            <PrimaryLogo />
+                            <PrimaryLogo/>
                         </Link>
-                            <LinkButton link="/">
-                                Написати нам
-                            </LinkButton>
-                            <LinkButton link="/">
-                                Працювати у нас
-                            </LinkButton>
+                        <LinkButton link={writeUsLink}>
+                            Написати нам
+                        </LinkButton>
+                        <LinkButton link={workWithUsLink}>
+                            Працювати у нас
+                        </LinkButton>
                     </nav>
-                    <SmallLogo className={styles.smallLogo} />
+                    <SmallLogo className={styles.smallLogo}/>
                     <nav>
-                        <LinkButton link="/">
+                        <LinkButton link={whereToBuyLink}>
                             Де купити
                         </LinkButton>
-                        <LinkButton link="/">
+                        <LinkButton link={whereWorkLink}>
                             Де працюємо
                         </LinkButton>
-                        <LinkButton link="/">
+                        <LinkButton link={reviewsLink}>
                             Відгуки
                         </LinkButton>
-                        <LinkButton link="/">
+                        <LinkButton link={rulesLink}>
                             Правила
                         </LinkButton>
                     </nav>
                 </div>
                 <div className={styles.headerContentMobile}>
-                    <SmallLogo className={styles.smallLogo} />
+                    <SmallLogo className={styles.smallLogo}/>
                     <button onClick={toggleBurgerMenu}>
-                        <RxHamburgerMenu />
+                        <RxHamburgerMenu/>
                     </button>
                 </div>
             </header>

@@ -2,15 +2,21 @@ import React from 'react';
 import styles from './WorkOffer.module.scss';
 import ButtonFrame from "../../components/button-frame/ButtonFrame";
 import {Link} from "react-router-dom";
+import {useLinkStore} from "../../store/linkStore";
 
 const WorkOffer = () => {
+
+    const getLink = useLinkStore((state) => state.getLink);
+    const partnerShip = getLink("partnerShip") || '/';
+    const manager = getLink("manager") || '/';
+
     return (
         <div className={styles.workOfferWrapper}>
             <h3>ПРОПОНУЄМО СПІВПРАЦЮ</h3>
             <div className={styles.workOfferContent}>
                 <div className={styles.partnerShip}>
                     <p>Розглядаємо будь-яку пропозицію співпраці з виробниками та постачальниками продукції</p>
-                    <Link className={styles.partnerLink} to="/">
+                    <Link className={styles.partnerLink} to={partnerShip}>
                         Домовитися про співпрацю
                     </Link>
                 </div>
@@ -19,7 +25,7 @@ const WorkOffer = () => {
                         <h4>Потребуємо членів персоналу:</h4>
                         <p>кур’єрів / кур’єрів експедиторів / фасовщиків / хіміків</p>
                     </section>
-                    <ButtonFrame type="big" link="/" title="МЕНЕДЖЕР ПЕРСОНАЛУ"/>
+                    <ButtonFrame type="big" link={manager} title="МЕНЕДЖЕР ПЕРСОНАЛУ"/>
                  </div>
             </div>
         </div>
