@@ -1,0 +1,26 @@
+.turnCaptcha {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  p {
+    font-size: 12px;
+    color: var(--white);
+  }
+
+  button {
+    align-content: start;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    margin: 5px 0 0 0;
+
+
+    &:hover {
+      background-color: var(--secondary-color-hovered);
+    }
+  }
+}

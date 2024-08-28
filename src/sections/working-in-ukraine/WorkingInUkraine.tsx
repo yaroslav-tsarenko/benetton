@@ -7,8 +7,14 @@ import {regions} from "../../data/regions/regions";
 import {settlements} from "../../data/settlements/settlements"; // Імпорт даних про населені пункти
 import {Fade} from "react-awesome-reveal";
 import {Link} from "react-router-dom";
+import {useLinkStore} from "../../store/linkStore";
 
 const WorkingInUkraine = () => {
+
+    const getLink = useLinkStore((state) => state.getLink);
+    const wannaWork = getLink("wannaWork") || '/';
+    const wholesale = getLink("wholeSale") || '/';
+
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredRegions, setFilteredRegions] = useState(regions);
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null); // Доданий стан для вибраного регіону
@@ -77,7 +83,7 @@ const WorkingInUkraine = () => {
                         </section>
                     </div>
                     <section>
-                        <LinkButton link="/">
+                        <LinkButton link={wannaWork}>
                             Хочу працювати
                         </LinkButton>
                         <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
@@ -87,7 +93,7 @@ const WorkingInUkraine = () => {
                 <div className={styles.sidebar}>
                     <h5>* Щоб обрати окреме місто/село області натисність на будь-яку з наведеної карти</h5>
                     <section>
-                        <LinkButton link="/">
+                        <LinkButton link={wholesale}>
                             Відправки / ОПТ
                         </LinkButton>
                         <p>Контакт, якщо цікавить пересилка або ОПТ</p>
@@ -137,13 +143,13 @@ const WorkingInUkraine = () => {
                 </div>
                 <div className={styles.chooseOptionsContent}>
                     <section>
-                        <Link className={styles.link} to={"/"}>
+                        <Link className={styles.link} to={wannaWork}>
                             Хочу працювати
                         </Link>
                         <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
                     </section>
                     <section>
-                        <Link className={styles.link} to="/">
+                        <Link className={styles.link} to={wholesale}>
                             Відправки / ОПТ
                         </Link>
                         <p>Контакт, якщо цікавить пересилка або ОПТ</p>
