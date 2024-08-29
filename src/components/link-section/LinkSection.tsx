@@ -1,35 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import styles from "./LinkSection.module.scss";
-import { useLinkStore } from '../../store/linkStore';
+import React from 'react';
+import styles from './LinkSection.module.scss';
 
 interface LinkSectionProps {
     label: string;
     customNameOfLink: string;
+    value: string;
+    onChange: (name: string, value: string) => void;
 }
 
-const LinkSection: React.FC<LinkSectionProps> = ({ label, customNameOfLink }) => {
-    const [value, setValue] = useState('');
-    const setLink = useLinkStore((state) => state.setLink);
-
-    useEffect(() => {
-        const storedValue = useLinkStore.getState().getLink(customNameOfLink);
-        if (storedValue) {
-            setValue(storedValue);
-        }
-    }, [customNameOfLink]);
-
+const LinkSection: React.FC<LinkSectionProps> = ({ label, customNameOfLink, value, onChange }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-        setLink(customNameOfLink, e.target.value);
+        onChange(customNameOfLink, e.target.value);
     };
 
     return (
         <div className={styles.linkSection}>
-            <p>{label}</p>
-            <input
-                value={value}
-                onChange={handleChange}
-            />
+            <label>{label}</label>
+            <input type="text" value={value} onChange={handleChange} />
         </div>
     );
 };

@@ -1,27 +1,27 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styles from './FastOrder.module.scss';
 import ContainerWrapper from "../../components/container-wrapper/ContainerWrapper";
 import ButtonFrame from "../../components/button-frame/ButtonFrame";
-import {useLinkStore} from "../../store/linkStore";
 
-const FastOrder = () => {
+interface FasOrderProps {
+    autoSale1Link: string,
+    autoSale2Link: string,
+    autoSale3Link: string,
+    telegramChatLink: string,
+    telegramBot1Link: string,
+    telegramBot2Link: string,
+}
 
-    const getLink = useLinkStore((state) => state.getLink);
-    const autoSale1 = getLink("autoSale1") || '/';
-    const autoSale2 = getLink("autoSale2") || '/';
-    const autoSale3 = getLink("autoSale3") || '/';
-    const telegramChatLink = getLink("telegramChat") || '/';
-    const telegramBot1Link = getLink("telegramBot1") || '/';
-    const telegramBot2Link = getLink("telegramBot2") || '/';
+const FastOrder: FC<FasOrderProps> = ({autoSale1Link, autoSale2Link, autoSale3Link, telegramChatLink, telegramBot1Link, telegramBot2Link}) => {
 
     return (
         <div className={styles.fastOrderWrapper}>
             <h1>ШВИДКЕ ЗАМОВЛЕННЯ</h1>
             <div className={styles.fastOrderContent}>
                 <ContainerWrapper title="САЙТИ АВТОПРОДАЖ">
-                    <ButtonFrame type="big" link={autoSale1} title="BNT24.BIZ" number="01"/>
-                    <ButtonFrame type="big" link={autoSale2} title="BNT24.CC" number="02"/>
-                    <ButtonFrame type="big" link={autoSale3} title="GREEN-MARKET.OR" number="03"/>
+                    <ButtonFrame type="big" link={autoSale1Link} title="BNT24.BIZ" number="01"/>
+                    <ButtonFrame type="big" link={autoSale2Link} title="BNT24.CC" number="02"/>
+                    <ButtonFrame type="big" link={autoSale3Link} title="GREEN-MARKET.OR" number="03"/>
                 </ContainerWrapper>
                 <ContainerWrapper
                     title="ТЕЛЕГРАМ ЧАТ"

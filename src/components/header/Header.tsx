@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Link} from "react-router-dom";
 import {ReactComponent as PrimaryLogo} from "../../assets/images/primary-logo.svg";
 import {ReactComponent as SmallLogo} from "../../assets/images/small-logo-benetton.svg";
@@ -6,18 +6,18 @@ import {ReactComponent as TimesIcon} from "../../assets/icons/timesIcon.svg";
 import LinkButton from "../link-button/LinkButton";
 import styles from './Header.module.scss';
 import {RxHamburgerMenu} from "react-icons/rx";
-import {useLinkStore} from "../../store/linkStore";
 
-const Header = () => {
+interface HeaderProps {
+    writeUsLink: string;
+    workWithUsLink: string;
+    whereToBuyLink: string;
+    whereWorkLink: string;
+    reviewsLink: string;
+    rulesLink: string;
+}
+
+const Header: FC<HeaderProps> = ({writeUsLink, workWithUsLink, whereWorkLink, whereToBuyLink, reviewsLink, rulesLink}) => {
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-    const getLink = useLinkStore((state) => state.getLink);
-    const writeUsLink = getLink("writeUs") || '/';
-    const workWithUsLink = getLink("writeUs") || '/';
-    const whereToBuyLink = getLink("whereToBuy") || '/';
-    const whereWorkLink = getLink("whereWork") || '/';
-    const reviewsLink = getLink("reviews") || '/';
-    const rulesLink = getLink("rules") || '/';
-
     const toggleBurgerMenu = () => {
         setIsBurgerOpen(!isBurgerOpen);
     };
@@ -32,7 +32,7 @@ const Header = () => {
                         <Link className={styles.linkButtonNav} to={writeUsLink}>
                             Написати нам
                         </Link>
-                        <Link className={styles.linkButtonNav} to={writeUsLink}>
+                        <Link className={styles.linkButtonNav} to={workWithUsLink}>
                             Працювати у нас
                         </Link>
                     </nav>
