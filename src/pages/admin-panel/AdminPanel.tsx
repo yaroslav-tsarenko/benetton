@@ -4,8 +4,10 @@ import LinkSection from "../../components/link-section/LinkSection";
 import TurnCaptcha from "../../components/turn-on-captcha/TurnCaptcha";
 import axios from "axios";
 import {BACKEND_URL} from "../../constants/constants";
+import RotatingLinesLoader from "../../components/rotating-lines-loader/RotatingLinesLoader";
 
 const AdminPanel: React.FC = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [settings, setSettings] = useState({
         captcha: false,
         writeUsLink: "",
@@ -52,6 +54,8 @@ const AdminPanel: React.FC = () => {
     };
 
     const handleSave = async () => {
+        setIsLoading(true);
+
         try {
             const response = await axios.post(`${BACKEND_URL}/apply-settings`, settings);
             if (response.status === 200) {
@@ -61,6 +65,7 @@ const AdminPanel: React.FC = () => {
         } catch (error) {
             console.error("There was an error updating the settings!", error);
             alert("Failed to save changes");
+            setIsLoading(false);
         }
     };
 
@@ -94,7 +99,14 @@ const AdminPanel: React.FC = () => {
                 <LinkSection label="Посилання на кнопку 'Менеджер персоналу'" customNameOfLink="managerLink" value={settings.managerLink} onChange={handleInputChange} />
                 <LinkSection label="Посилання на кнопку бонус" customNameOfLink="bonusLink" value={settings.bonusLink} onChange={handleInputChange} />
             </div>
-            <button onClick={handleSave}>Зберегти</button>
+            <button onClick={handleSave}>
+                {isLoading ?
+                    <>
+                        <RotatingLinesLoader title="Обробка..." />
+                    </> :
+                    "Зберегти"
+                }
+            </button>
         </div>
     );
 };
