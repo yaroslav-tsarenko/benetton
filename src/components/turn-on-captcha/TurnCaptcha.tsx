@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import styles from "./TurnCaptcha.module.scss";
-import {useLinkStore} from "../../store/linkStore";
 
-const TurnCaptcha: React.FC = () => {
-    const setCaptchaStatus = useLinkStore((state) => state.setCaptchaStatus);
-    const captchaStatus = useLinkStore((state) => state.getCaptchaStatus());
+interface TurnCaptchaProps {
+    onChange: (status: boolean) => void;
+}
+
+const TurnCaptcha: React.FC<TurnCaptchaProps> = ({ onChange }) => {
+    const [captchaStatus, setCaptchaStatus] = useState(false);
 
     const toggleCaptcha = () => {
-        const newStatus = captchaStatus === 'on' ? 'off' : 'on';
-        setCaptchaStatus(newStatus);
+        setCaptchaStatus(!captchaStatus);
+        onChange(!captchaStatus);
     };
 
     return (
         <div className={styles.turnCaptcha}>
             <p>Включити капчу</p>
             <button onClick={toggleCaptcha}>
-                {captchaStatus === 'on' ? 'Turn Captcha Off' : 'Turn Captcha On'}
+                {captchaStatus ? 'Turn Captcha Off' : 'Turn Captcha On'}
             </button>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import styles from "./WorkingInUkraine.module.scss";
 import LinkButton from "../../components/link-button/LinkButton";
 import {ReactComponent as SearchIcon} from "../../assets/icons/search-icon.svg";
@@ -7,14 +7,15 @@ import {regions} from "../../data/regions/regions";
 import {settlements} from "../../data/settlements/settlements"; // Імпорт даних про населені пункти
 import {Fade} from "react-awesome-reveal";
 import {Link} from "react-router-dom";
-import {useLinkStore} from "../../store/linkStore";
 
-const WorkingInUkraine = () => {
 
-    const getLink = useLinkStore((state) => state.getLink);
-    const wannaWork = getLink("wannaWork") || '/';
-    const wholesale = getLink("wholeSale") || '/';
+interface WorkingInUkraineProps {
+    wannaWorkLink: string,
+    wholesaleLink: string,
+}
 
+
+const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLink}) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredRegions, setFilteredRegions] = useState(regions);
     const [selectedRegion, setSelectedRegion] = useState<string | null>(null); // Доданий стан для вибраного регіону
@@ -83,7 +84,7 @@ const WorkingInUkraine = () => {
                         </section>
                     </div>
                     <section>
-                        <LinkButton link={wannaWork}>
+                        <LinkButton link={wannaWorkLink}>
                             Хочу працювати
                         </LinkButton>
                         <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
@@ -93,7 +94,7 @@ const WorkingInUkraine = () => {
                 <div className={styles.sidebar}>
                     <h5>* Щоб обрати окреме місто/село області натисність на будь-яку з наведеної карти</h5>
                     <section>
-                        <LinkButton link={wholesale}>
+                        <LinkButton link={wholesaleLink}>
                             Відправки / ОПТ
                         </LinkButton>
                         <p>Контакт, якщо цікавить пересилка або ОПТ</p>
@@ -143,13 +144,13 @@ const WorkingInUkraine = () => {
                 </div>
                 <div className={styles.chooseOptionsContent}>
                     <section>
-                        <Link className={styles.link} to={wannaWork}>
+                        <Link className={styles.link} to={wannaWorkLink}>
                             Хочу працювати
                         </Link>
                         <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
                     </section>
                     <section>
-                        <Link className={styles.link} to={wholesale}>
+                        <Link className={styles.link} to={wholesaleLink}>
                             Відправки / ОПТ
                         </Link>
                         <p>Контакт, якщо цікавить пересилка або ОПТ</p>
