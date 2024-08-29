@@ -9,6 +9,7 @@ const PrivateRoute = ({ element: Element, isAuthenticated }: { element: React.Re
 };
 
 const App = () => {
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
