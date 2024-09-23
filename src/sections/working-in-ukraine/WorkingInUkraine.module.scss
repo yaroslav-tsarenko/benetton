@@ -64,6 +64,24 @@
   }
 }
 
+.chooseOptionButtonLink {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  background: var(--secondary-color);
+  text-decoration: none;
+  color: var(--white);
+
+  &:hover{
+    color: var(--secondary-color-hovered);
+  }
+}
+
 .chooseOptionsContent {
   width: 100%;
   display: flex;

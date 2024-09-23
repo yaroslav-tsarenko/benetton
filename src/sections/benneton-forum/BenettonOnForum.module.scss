@@ -13,8 +13,22 @@
   }
 }
 
-.tipMobile{
+.tipMobile {
   display: none;
+ padding: 0 25px 0 25px;
+}
+
+.benettonOnForumContentMobile{
+  width: 100%;
+  background: rgba(22, 28, 21, 0.44);
+  backdrop-filter: blur(8px);
+  margin-top: -30px;
+  height: fit-content;
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  position: relative;
+  padding: 24px;
 }
 
 .benettonOnForumContent {
@@ -22,7 +36,7 @@
   background: rgba(22, 28, 21, 0.44);
   backdrop-filter: blur(8px);
   margin-top: -30px;
-  height: 190px;
+  height: fit-content;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -44,21 +58,16 @@
     display: flex;
     height: fit-content;
     gap: 15px;
-
+    margin: 0 0 15px 0;
 
     &:first-child {
       display: flex;
       width: 100%;
       align-content: start;
-      margin: 0 0 15px 0;
       justify-content: start;
     }
 
-    &:last-child {
-      align-content: end;
-      justify-content: end;
-      margin: 0 165px 0 0;
-    }
+
   }
 }
 
@@ -98,49 +107,56 @@
   }
 }
 
+.buttonGrid {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .buttonGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .buttonGrid section {
+    margin-right: 0 !important;
+    justify-content: center !important;
+  }
+}
+
 
 @media screen and (max-width: 1275px) {
+
+  .benettonOnForumContent{
+    display: none;
+    visibility: hidden;
+
+    &::after {
+      display: none;
+    }
+
+    section{
+        display: none;
+    }
+  }
+
+  .benettonOnForumContentMobile{
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    gap: 10px;
+    margin-top: -10px;
+  }
 
   .tip {
     display: none;
   }
 
-  .tipMobile{
+  .tipMobile {
     display: flex;
   }
 
-  .benettonOnForumContent {
-    height: fit-content;
-    display: flex;
-    flex-direction: unset;
-    gap: 10px;
 
-    &::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url("../../assets/images/half-logo.svg") no-repeat right center;
-      background-size: contain;
-    }
-
-    section {
-      flex-direction: column;
-      gap: 10px;
-
-      &:first-child {
-        margin: 0;
-        width: 50%;
-        gap: 10px;
-      }
-
-      &:last-child {
-        margin: 0;
-        width: 50%;
-        gap: 10px;
-      }
-    }
-  }
 
 }
 
@@ -158,13 +174,11 @@
 
     }
   }
-  .benettonOnForumContent {
-    margin-top: -5px;
-  }
+
 
 }
 
-@media screen and (max-width: 425px){
+@media screen and (max-width: 425px) {
   .benettonOnForumWrapper {
 
 

@@ -15,7 +15,6 @@ const TurnCaptcha: React.FC<TurnCaptchaProps> = ({ onChange }) => {
 
     return (
         <div className={styles.turnCaptcha}>
-            <p>Включити капчу</p>
             <button onClick={toggleCaptcha}>
                 {captchaStatus ? 'Turn Captcha Off' : 'Turn Captcha On'}
             </button>
