@@ -14,7 +14,7 @@
     text-align: center;
   }
 
-  button{
+  button {
     width: fit-content;
     display: flex;
     padding: 10px;
@@ -44,13 +44,82 @@
   width: fit-content;
 }
 
-@media screen and (max-width: 676px){
-  .adminPanelContent{
+.adminPanelContentWrapper {
+  display: flex;
+  max-width: 1920px;
+  overflow-x: scroll;
+  width: 100%;
+  gap: 10px;
+}
+
+.settlementItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: red;
+}
+
+.addButtonSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color-dark);
+    background: none;
+    outline: none;
+    color: white;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      border: 1px solid var(--secondary-color-hovered);
+    }
+
+  }
+}
+
+.saveButton {
+  width: fit-content;
+  display: flex;
+  position: fixed;
+  padding: 10px;
+  margin: 15px auto;
+  border-radius: 8px;
+  font-size: 13px;
+  bottom: 0;
+  color: var(--white);
+  cursor: pointer;
+  background: var(--secondary-color);
+  border: none;
+
+  &:hover {
+    background: var(--secondary-color-hovered);
+  }
+}
+
+
+@media screen and (max-width: 676px) {
+
+  .adminPanelContentWrapper{
+    flex-direction: column;
+  }
+
+  .adminPanelContent {
     grid-template-columns: repeat(2, 2fr);
   }
 
-  .adminPanelWrapper{
-    h1{
+  .adminPanelWrapper {
+    h1 {
       line-height: 0.8;
       text-align: center;
       font-size: 30px;
@@ -58,8 +127,8 @@
   }
 }
 
-@media screen and (max-width: 470px){
-  .adminPanelContent{
+@media screen and (max-width: 470px) {
+  .adminPanelContent {
     align-content: center;
     align-items: center;
     justify-content: center;

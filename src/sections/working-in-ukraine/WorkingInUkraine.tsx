@@ -1,42 +1,97 @@
-import React, {ChangeEvent, FC, useState} from 'react';
-import styles from "./WorkingInUkraine.module.scss";
-import LinkButton from "../../components/link-button/LinkButton";
-import {ReactComponent as SearchIcon} from "../../assets/icons/search-icon.svg";
-import {ReactComponent as UkraineMap} from "../../assets/images/ukraine-map.svg";
-import {regions} from "../../data/regions/regions";
-import {settlements} from "../../data/settlements/settlements"; // Імпорт даних про населені пункти
-import {Fade} from "react-awesome-reveal";
+import React, {ChangeEvent, FC, useState, useEffect} from 'react';
+import axios from 'axios';
+import styles from './WorkingInUkraine.module.scss';
+import {ReactComponent as SearchIcon} from '../../assets/icons/search-icon.svg';
+import {ReactComponent as UkraineMap} from '../../assets/images/ukraine-map.svg';
+import {Fade} from 'react-awesome-reveal';
+import LinkButton from '../../components/link-button/LinkButton';
+import {BACKEND_URL} from '../../constants/constants';
 import {Link} from "react-router-dom";
 
-
-interface WorkingInUkraineProps {
-    wannaWorkLink: string,
-    wholesaleLink: string,
+interface RegionSettlement {
+    region: string;
+    settlements: string[];
 }
 
+interface WorkingInUkraineProps {
+    wannaWorkLink: string;
+    wholesaleLink: string;
+}
 
 const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLink}) => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filteredRegions, setFilteredRegions] = useState(regions);
-    const [selectedRegion, setSelectedRegion] = useState<string | null>(null); // Доданий стан для вибраного регіону
+    const [searchTerm, setSearchTerm] = useState('');
+    const [regions, setRegions] = useState<RegionSettlement[]>([]);
+    const [filteredRegions, setFilteredRegions] = useState<RegionSettlement[]>([]);
+    const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+    const [wantToWorkButton, setWantToWorkButton] = useState({name: "", link: "", description: ""});
+    const [deliverySuppliesButton, setDeliverySuppliesButton] = useState({name: "", link: "", description: ""});
+    const [wantToWorkButtonLink, setWantToWorkButtonLink] = useState('');
+    const [wantToWorkButtonName, setWantToWorkButtonName] = useState('');
+    const [wantToWorkButtonDescription, setWantToWorkButtonDescription] = useState('');
+    const [deliverySuppliesButtonLink, setDeliverySuppliesButtonLink] = useState('');
+    const [deliverySuppliesButtonDescription, setDeliverySuppliesButtonDescription] = useState('');
+    const [deliverySuppliesButtonName, setDeliverySuppliesButtonName] = useState('');
 
+
+    useEffect(() => {
+        const fetchRegionsAndSettlements = async () => {
+            try {
+                const response = await axios.get(`${BACKEND_URL}/get-regions-and-settlements`);
+                setRegions(response.data);
+                setFilteredRegions(response.data);
+            } catch (error) {
+                console.error('Error fetching regions and settlements:', error);
+            }
+        };
+
+        const fetchButtons = async () => {
+            try {
+                const wantButtonResponse = await axios.get(`${BACKEND_URL}/get-want-to-work-button`);
+                const deliveryButtonResponse = await axios.get(`${BACKEND_URL}/get-delivery-supplies-button`);
+
+                console.log("Fetched wantToWorkButton data: ", wantButtonResponse.data);
+
+                setWantToWorkButtonLink(wantButtonResponse.data.link);
+                setWantToWorkButtonName(wantButtonResponse.data.name);
+                setWantToWorkButtonDescription(wantButtonResponse.data.description);
+
+                setDeliverySuppliesButtonName(deliveryButtonResponse.data.name);
+                setDeliverySuppliesButtonLink(deliveryButtonResponse.data.link);
+                setDeliverySuppliesButtonDescription(deliveryButtonResponse.data.description);
+
+                setWantToWorkButton(wantButtonResponse.data[0] || {name: "", link: "", description: ""});
+                setDeliverySuppliesButton(deliveryButtonResponse.data[0] || {name: "", link: "", description: ""});
+            } catch (error) {
+                console.error('Error fetching buttons:', error);
+            }
+        };
+
+
+        fetchButtons();
+        fetchRegionsAndSettlements();
+    }, []);
+
+    // Handle input change and filter regions based on search term
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchTerm(value);
         setFilteredRegions(
-            regions.filter(region =>
-                region.toLowerCase().includes(value.toLowerCase())
+            regions.filter((region) =>
+                region.region.toLowerCase().includes(value.toLowerCase())
             )
         );
     };
 
+    // Handle region selection and display the corresponding settlements
     const handleRegionSelect = (region: string) => {
         setSelectedRegion(region);
     };
 
-    const filteredSettlements = selectedRegion
-        ? settlements.find(s => s.region === selectedRegion)?.settlements || []
-        : [];
+    // Find the settlements for the selected region
+    const filteredSettlements =
+        selectedRegion
+            ? regions.find((r) => r.region === selectedRegion)?.settlements || []
+            : [];
 
     return (
         <div className={styles.ukraineMapContainerWrapper}>
@@ -60,8 +115,8 @@ const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLi
                                 <Fade>
                                     <div className={styles.regionsAutoComplete}>
                                         {filteredRegions.map((region, index) => (
-                                            <p key={index} onClick={() => handleRegionSelect(region)}>
-                                                {region}
+                                            <p key={index} onClick={() => handleRegionSelect(region.region)}>
+                                                {region.region}
                                             </p>
                                         ))}
                                     </div>
@@ -83,21 +138,24 @@ const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLi
                             </div>
                         </section>
                     </div>
-                    <section>
-                        <LinkButton link={wannaWorkLink}>
-                            Хочу працювати
-                        </LinkButton>
-                        <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
-                    </section>
+                    {wantToWorkButtonLink && (
+                        <section>
+                            <LinkButton link={wantToWorkButtonLink}>{wantToWorkButtonName}</LinkButton>
+                            <p>{wantToWorkButtonDescription}</p>
+                        </section>
+                    )}
                 </div>
                 <UkraineMap className={styles.ukraineMap}/>
                 <div className={styles.sidebar}>
                     <h5>* Щоб обрати окреме місто/село області натисність на будь-яку з наведеної карти</h5>
                     <section>
-                        <LinkButton link={wholesaleLink}>
-                            Відправки / ОПТ
-                        </LinkButton>
-                        <p>Контакт, якщо цікавить пересилка або ОПТ</p>
+                        {deliverySuppliesButtonLink && (
+                            <>
+                                <LinkButton
+                                    link={deliverySuppliesButtonLink}>{deliverySuppliesButtonName}</LinkButton>
+                                <p>{deliverySuppliesButtonDescription}</p>
+                            </>
+                        )}
                     </section>
                 </div>
             </div>
@@ -119,8 +177,8 @@ const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLi
                             <Fade>
                                 <div className={styles.regionsAutoComplete}>
                                     {filteredRegions.map((region, index) => (
-                                        <p key={index} onClick={() => handleRegionSelect(region)}>
-                                            {region}
+                                        <p key={index} onClick={() => handleRegionSelect(region.region)}>
+                                            {region.region}
                                         </p>
                                     ))}
                                 </div>
@@ -143,23 +201,24 @@ const WorkingInUkraine: FC<WorkingInUkraineProps> = ({wannaWorkLink, wholesaleLi
                     </section>
                 </div>
                 <div className={styles.chooseOptionsContent}>
+                    {wantToWorkButtonLink && (
+                        <section>
+                            <Link className={styles.chooseOptionButtonLink} to={wantToWorkButtonLink}>{wantToWorkButtonName}</Link>
+                            <p>{wantToWorkButtonDescription}</p>
+                        </section>
+                    )}
                     <section>
-                        <Link className={styles.link} to={wannaWorkLink}>
-                            Хочу працювати
-                        </Link>
-                        <p>Контакт, якщо цікавить робота у будь-якому з міст</p>
+                        {deliverySuppliesButtonLink && (
+                            <>
+                                <Link className={styles.chooseOptionButtonLink}
+                                    to={deliverySuppliesButtonLink}>{deliverySuppliesButtonName}</Link>
+                                <p>{deliverySuppliesButtonDescription}</p>
+                            </>
+                        )}
                     </section>
-                    <section>
-                        <Link className={styles.link} to={wholesaleLink}>
-                            Відправки / ОПТ
-                        </Link>
-                        <p>Контакт, якщо цікавить пересилка або ОПТ</p>
-                    </section>
-
                 </div>
             </div>
         </div>
-
     );
 };
 
