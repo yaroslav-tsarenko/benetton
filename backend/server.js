@@ -52,30 +52,24 @@ app.post('/apply-settings', async (req, res) => {
         await BonusButton.deleteMany({});
         await BonusButton.create(bonusButton);
 
-        // Update WantToWorkButton
         await WantToWorkButton.deleteMany({});  // Clear existing entries
         await WantToWorkButton.create(wantToWorkButton);  // Insert new data
 
-        // Update DeliverySuppliesButton
         await DeliverySuppliesButton.deleteMany({});
         await DeliverySuppliesButton.create(deliverySuppliesButton);
 
         await ForumButton.deleteMany({});
         await ForumButton.insertMany(forumButtons);
 
-        // Update LinkButtons
         await LinkButton.deleteMany({});
         await LinkButton.insertMany(buttons);
 
-        // Update TelegramChatLinkButtons
         await TelegramChatLinkButton.deleteMany({});
         await TelegramChatLinkButton.insertMany(chatButtons);
 
-        // Update TelegramBotLinkButtons
         await TelegramBotLinkButton.deleteMany({});
         await TelegramBotLinkButton.insertMany(botButtons);
 
-        // Update Regions and Settlements
         await RegionSettlement.deleteMany({});
         await RegionSettlement.insertMany(regions);
 

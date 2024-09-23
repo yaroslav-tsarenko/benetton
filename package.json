@@ -43,8 +43,6 @@
     "start": "react-scripts start",
     "start-server": "nodemon backend/server.js",
     "build": "react-scripts build",
-    "generate:settlements": "ts-node backend/scripts/generateSettlements.ts",
-    "prebuild": "npm run generate:settlements",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
