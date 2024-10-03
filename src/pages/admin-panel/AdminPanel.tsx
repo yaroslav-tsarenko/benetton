@@ -14,7 +14,7 @@ interface Button {
 
 const AdminPanel: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [showInputs, setShowInputs] = useState(false);
+    const [headerButtons, setHeaderButtons] = useState<Button[]>([{ link: "", name: "" }]);
     const [buttons, setButtons] = useState([{name: "", link: ""}]);
     const [chatButtons, setChatButtons] = useState([{name: "", link: ""}]);
     const [botButtons, setBotButtons] = useState([{name: "", link: ""}]);
@@ -94,6 +94,15 @@ const AdminPanel: React.FC = () => {
             }
         };
 
+        const fetchHeaderButtons = async () => {
+            try {
+                const response = await axios.get(`${BACKEND_URL}/get-header-buttons`);
+                setHeaderButtons(response.data || [{ link: "", title: "" }]);
+            } catch (error) {
+                console.error("Error fetching header buttons:", error);
+            }
+        };
+
         const fetchChatButtons = async () => {
             try {
                 const response = await axios.get(`${BACKEND_URL}/get-telegram-chat-buttons`);
@@ -156,6 +165,7 @@ const AdminPanel: React.FC = () => {
             }
         };
 
+        fetchHeaderButtons();
         fetchBonusButton();
         fetchWorkOfferButton();
         fetchContactManagerButton();
@@ -167,6 +177,28 @@ const AdminPanel: React.FC = () => {
         fetchBotButtons();
         fetchRegionsSettlements();
     }, []);
+
+    const addNewHeaderButton = () => {
+        if (headerButtons.length < 9) {
+            setHeaderButtons([...headerButtons, { link: "", name: "" }]);
+        } else {
+            alert("You can add a maximum of 6 buttons");
+        }
+    };
+
+    const handleHeaderButtonChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setHeaderButtons((prevButtons) => {
+            const newButtons = [...prevButtons];
+            newButtons[index] = { ...newButtons[index], [name]: value };
+            return newButtons;
+        });
+    };
+
+
+    const removeHeaderButton = (index: number) => {
+        setHeaderButtons(headerButtons.filter((_, i) => i !== index));
+    };
 
 
     const addNewForumButton = (
@@ -180,7 +212,6 @@ const AdminPanel: React.FC = () => {
         }
     };
 
-// Function to handle input changes for a button
     const handleNewForumButtonChange = (
         index: number,
         e: React.ChangeEvent<HTMLInputElement>,
@@ -194,7 +225,6 @@ const AdminPanel: React.FC = () => {
         });
     };
 
-// Function to remove a button
     const removeForumButton = (
         index: number,
         setFunction: React.Dispatch<React.SetStateAction<Button[]>>,
@@ -268,6 +298,7 @@ const AdminPanel: React.FC = () => {
                 forumButtons,
                 workOfferButton,
                 contactManagerButton,
+                headerButtons,
                 regions
             });
             if (response.status === 200) {
@@ -614,6 +645,30 @@ const AdminPanel: React.FC = () => {
                             })}
                         />
                     </div>
+                </ContainerWrapper>
+                <ContainerWrapper title="Хедер кнопки">
+                    <button onClick={addNewHeaderButton} disabled={headerButtons.length >= 9}>
+                        Add Button
+                    </button>
+                    {headerButtons.map((button, index) => (
+                        <div className={styles.addButtonSection} key={index}>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Назва"
+                                value={button.name}
+                                onChange={(e) => handleHeaderButtonChange(index, e)}
+                            />
+                            <input
+                                type="text"
+                                name="link"
+                                placeholder="Посилання"
+                                value={button.link}
+                                onChange={(e) => handleHeaderButtonChange(index, e)}
+                            />
+                            <button onClick={() => removeHeaderButton(index)}>Remove Button</button>
+                        </div>
+                    ))}
                 </ContainerWrapper>
                 <ContainerWrapper title="Капча">
                     <TurnCaptcha

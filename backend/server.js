@@ -9,6 +9,7 @@ const DeliverySuppliesButton = require('../backend/models/DeliverySuppliesButton
 const WantToWorkButton = require('../backend/models/WantToWorkButtonSchema');
 const WorkOfferButton = require('../backend/models/WorkOfferButton');
 const ContactManagerButton = require('../backend/models/ContactManagerButton');
+const HeaderButton = require('../backend/models/HeaderButton');
 const BonusButton = require('../backend/models/BonusButton');
 const RegionSettlement = require('../backend/models/RegionSettlement');
 const ForumButton = require('../backend/models/ForumButton');
@@ -35,7 +36,7 @@ app.post('/apply-settings', async (req, res) => {
             return res.status(400).json({ message: 'Invalid data' });
         }
 
-        const { settings, forumButtons , bonusButton,   workOfferButton,
+        const { settings, forumButtons , bonusButton, headerButtons,   workOfferButton,
             contactManagerButton, wantToWorkButton, deliverySuppliesButton, buttons, chatButtons, botButtons, regions } = req.body;
 
         // Update settings
@@ -48,6 +49,9 @@ app.post('/apply-settings', async (req, res) => {
         // Update ContactManagerButton
         await ContactManagerButton.deleteMany({});
         await ContactManagerButton.create(contactManagerButton);
+
+        await HeaderButton.deleteMany({}); // Clear existing buttons
+        await HeaderButton.insertMany(headerButtons); // Insert new buttons
 
         await BonusButton.deleteMany({});
         await BonusButton.create(bonusButton);
@@ -79,6 +83,17 @@ app.post('/apply-settings', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+app.get('/get-header-buttons', async (req, res) => {
+    try {
+        const headerButtons = await HeaderButton.find();
+        res.status(200).json(headerButtons);
+    } catch (error) {
+        console.error('Error fetching header buttons:', error);
+        res.status(400).json({ message: error.message });
+    }
+});
+
 
 app.get('/get-bonus-button', async (req, res) => {
     try {
