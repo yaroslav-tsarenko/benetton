@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import {ReactComponent as PrimaryLogo} from "../../assets/images/primary-logo.svg";
 import {ReactComponent as SmallLogo} from "../../assets/images/small-logo-benetton.svg";
@@ -6,6 +6,13 @@ import {ReactComponent as TimesIcon} from "../../assets/icons/timesIcon.svg";
 import LinkButton from "../link-button/LinkButton";
 import styles from './Header.module.scss';
 import {RxHamburgerMenu} from "react-icons/rx";
+import {BACKEND_URL} from "../../constants/constants";
+import axios from "axios";
+
+interface HeaderButton {
+    link: string;
+    name: string;
+}
 
 interface HeaderProps {
     writeUsLink: string;
@@ -16,11 +23,38 @@ interface HeaderProps {
     rulesLink: string;
 }
 
-const Header: FC<HeaderProps> = ({writeUsLink, workWithUsLink, whereWorkLink, whereToBuyLink, reviewsLink, rulesLink}) => {
+const Header: FC<HeaderProps> = ({
+                                     writeUsLink,
+                                     workWithUsLink,
+                                     whereWorkLink,
+                                     whereToBuyLink,
+                                     reviewsLink,
+                                     rulesLink
+                                 }) => {
     const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const toggleBurgerMenu = () => {
         setIsBurgerOpen(!isBurgerOpen);
     };
+
+    const [headerButtons, setHeaderButtons] = useState<HeaderButton[]>([]);
+
+    useEffect(() => {
+        const fetchHeaderButtons = async () => {
+            try {
+                const response = await axios.get(`${BACKEND_URL}/get-header-buttons`);
+                const buttons = response.data;
+                const links = buttons.map((button: HeaderButton) => button.link);
+                const names = buttons.map((button: HeaderButton) => button.name);
+                setHeaderButtons(buttons);
+                console.log("Links:", links);
+                console.log("Names:", names);
+            } catch (error) {
+                console.error('Error fetching header buttons:', error);
+            }
+        };
+
+        fetchHeaderButtons();
+    }, []);
 
     return (
         <>
@@ -29,29 +63,26 @@ const Header: FC<HeaderProps> = ({writeUsLink, workWithUsLink, whereWorkLink, wh
                     <TimesIcon onClick={toggleBurgerMenu} className={styles.timesButton}/>
                     <PrimaryLogo/>
                     <nav>
-                        <Link className={styles.linkButtonNav} to={writeUsLink}>
-                            Написати нам
-                        </Link>
-                        <Link className={styles.linkButtonNav} to={workWithUsLink}>
-                            Працювати у нас
-                        </Link>
+                        {headerButtons.slice(0, 2).map((button, index) => (
+                            <Link className={styles.linkButtonNav} key={index} to={button.link}>
+                                {button.name}
+                            </Link>
+                        ))}
                     </nav>
                     <hr/>
                     <nav>
-                        <Link className={styles.linkButtonNav} to={whereWorkLink}>
-                            Де працюємо
-                        </Link>
-                        <Link className={styles.linkButtonNav} to={whereToBuyLink}>
-                            Де купити
-                        </Link>
+                        {headerButtons.slice(2, 4).map((button, index) => (
+                            <Link className={styles.linkButtonNav} key={index} to={button.link}>
+                                {button.name}
+                            </Link>
+                        ))}
                     </nav>
                     <nav>
-                        <Link className={styles.linkButtonNav} to={reviewsLink}>
-                            Відгуки
-                        </Link>
-                        <Link className={styles.linkButtonNav} to={rulesLink}>
-                            Правила
-                        </Link>
+                        {headerButtons.slice(4, 6).map((button, index) => (
+                            <Link className={styles.linkButtonNav} key={index} to={button.link}>
+                                {button.name}
+                            </Link>
+                        ))}
                     </nav>
                 </div>
             </div>
@@ -61,35 +92,38 @@ const Header: FC<HeaderProps> = ({writeUsLink, workWithUsLink, whereWorkLink, wh
                         <Link to="/" className={styles.logo}>
                             <PrimaryLogo/>
                         </Link>
-                        <LinkButton link={writeUsLink}>
-                            Написати нам
-                        </LinkButton>
-                        <LinkButton link={workWithUsLink}>
-                            Працювати у нас
-                        </LinkButton>
+                        {headerButtons.slice(0, 2).map((button, index) => (
+                            <LinkButton key={index} link={button.link}>
+                                {button.name}
+                            </LinkButton>
+                        ))}
                     </nav>
                     <SmallLogo className={styles.smallLogo}/>
                     <nav>
-                        <LinkButton link={whereToBuyLink}>
-                            Де купити
-                        </LinkButton>
-                        <LinkButton link={whereWorkLink}>
-                            Де працюємо
-                        </LinkButton>
-                        <LinkButton link={reviewsLink}>
-                            Відгуки
-                        </LinkButton>
-                        <LinkButton link={rulesLink}>
-                            Правила
-                        </LinkButton>
+                        {headerButtons.slice(2, 6).map((button, index) => (
+                            <LinkButton key={index} link={button.link}>
+                                {button.name}
+                            </LinkButton>
+                        ))}
                     </nav>
                 </div>
                 <div className={styles.headerContentMobile}>
-                    <SmallLogo className={styles.smallLogo}/>
-                    <button onClick={toggleBurgerMenu}>
-                        <RxHamburgerMenu/>
-                    </button>
+                    <section>
+                        <SmallLogo className={styles.smallLogo}/>
+                        <button onClick={toggleBurgerMenu}>
+                            <RxHamburgerMenu/>
+                        </button>
+                    </section>
+
+                    <div className={styles.headerMobileButtons}>
+                        {headerButtons.slice(6, 9).map((button, index) => (
+                            <Link className={styles.linkButtonNav} key={index} to={button.link}>
+                                {button.name}
+                            </Link>
+                        ))}
+                    </div>
                 </div>
+
             </header>
         </>
     );
